@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Serrurerie Fernandez | Serrurerie & Métallerie à Nîmes</title>
+  <meta name="description" content="Serrurerie Fernandez à Nîmes : dépannage, fabrication et pose sur mesure. Portails, garde-corps, menuiserie métallique. Devis gratuit."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue-night:#0f1824;
+      --blue-600:#1f4aa2;
+      --teal-500:#2aa198;
+      --steel-50:#f2f3f4;
+      --steel-100:#e5e7ea;
+      --steel-200:#d6dbe0;
+      --steel-400:#9aa3ad;
+      --ink:#2a2a2a;
+      --white:#ffffff;
+      --radius:16px;
+      --shadow:0 10px 20px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      overflow-x:hidden;
+      padding-top:0;
+      background: linear-gradient(180deg, #b5c1c5 0%, #3b4041 100%); /* fond acier */
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Ruban démo (caché pour coller la nav en haut) */
+    .ribbon{ display:none; }
+
+    /* Header / nav */
+    header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--steel-200)
+    }
+    .nav{max-width:1500px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 20px}
+    .menu{margin-left:auto;display:flex;gap:8px;list-style:none;padding:0;flex-wrap:wrap;row-gap:6px}
+    .menu a{padding:8px 10px;border-radius:10px;white-space:nowrap}
+    .menu a:hover{background:var(--steel-100)}
+    .cta{
+      background:linear-gradient(145deg, var(--blue-600), #2a5bd8);
+      color:var(--white);padding:10px 14px;border-radius:12px;font-weight:600;
+      box-shadow:0 6px 16px rgba(31,74,162,.25)
+    }
+    .cta:hover{opacity:.9}
+    .burger{
+      display:none;margin-left:auto;border:1px solid var(--steel-200);
+      background:#fff;padding:8px 10px;border-radius:10px;cursor:pointer
+    }
+    .drawer{
+      display:none;position:fixed;inset:60px 12px auto 12px;background:#fff;
+      border:1px solid var(--steel-200);border-radius:14px;box-shadow:var(--shadow);
+      padding:12px;z-index:999
+    }
+    .drawer a{display:block;padding:10px 12px;border-radius:10px}
+    .drawer a:hover{background:var(--steel-100)}
+
+    /* HERO (bandeau logo) */
+    section.hero{
+      max-width:none !important;
+      width:100vw;
+      margin:0 !important;
+      padding:90px 0 70px;                 /* + d’air autour du logo */
+      border-radius:0;
+      position:relative;
+      background:radial-gradient(60% 100% at 50% 0%, #172233 0%, #0f1824 60%, #0b1320 100%);
+      display:flex;align-items:center;justify-content:center;
+    }
+    section.hero::before{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.14;
+      background-image:url('https://images.unsplash.com/photo-1541516160071-4bb0c5af65a5?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;background-position:center;mix-blend:screen;
+    }
+    section.hero::after{
+      content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,.15), transparent);
+    }
+    .hero-center-logo{
+      height:auto; max-height:110px;      /* contrôle la hauteur du logo */
+      margin: 20px auto;                  /* air en haut/bas */
+      padding: 10px 0;
+      object-fit:contain;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))
+    }
+
+    /* Sections génériques */
+    section{max-width:1180px;margin:0 auto;padding:60px 20px}
+    h2{font-size:clamp(22px,3vw,30px);margin:0 0 18px;color:#f5f7fa;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+    .muted{color:#555}
+
+    /* À propos */
+    .about{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:stretch}
+    .card{background:var(--steel-100);border:1px solid var(--steel-200);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .about > .card{height:100%}
+
+    .about-photo{
+      position:relative;border-radius:18px;overflow:hidden;padding:0;background:#0f1824;
+      border:none;box-shadow:var(--shadow);
+      min-height:420px;                    /* hauteur suffisante desktop */
+    }
+    .about-photo .bg{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:grayscale(20%) blur(1px) brightness(.9);
+      transform:scale(1.08);               /* évite les angles “mangés” par le blur */
+    }
+    .about-photo .veil{position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,24,36,.30), rgba(15,24,36,.65))}
+    .about-photo .content{
+      position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
+      justify-content:flex-start;align-items:flex-start;
+      padding:40px 28px 80px;               /* + espace bas pour ne rien couper */
+      color:#fff;line-height:1.8;text-shadow:0 2px 6px rgba(0,0,0,.55);
+      background:linear-gradient(180deg, rgba(15,24,36,.25) 0%, rgba(15,24,36,.65) 100%)
+    }
+    .about-photo h3{margin:0 0 8px;font-size:20px;font-weight:600}
+    .about-photo p{margin:0;color:rgba(255,255,255,0.95)}
+    .about-photo::after{
+      content:"";position:absolute;inset:0;border-radius:inherit;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,0.25); /* bord optique propre */
+      pointer-events:none;
+    }
+
+    /* Services — grille + cartes */
+    .services{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:22px;
+      align-items:stretch;
+    }
+    .service{
+      border:2px solid transparent;border-radius:14px;
+      background:
+        linear-gradient(#f7f8fa, #f7f8fa) padding-box,
+        linear-gradient(135deg, #2aa198, #2a5bd8) border-box;
+      box-shadow:0 6px 16px rgba(0,0,0,0.06);
+      padding:20px;
+      transition:transform .25s ease, box-shadow .25s ease;
+      text-align:center;
+      display:flex;flex-direction:column;justify-content:center;
+    }
+    .service:hover{ transform:scale(1.035); box-shadow:0 8px 22px rgba(0,0,0,0.12); }
+    .service h3{
+      background:#e6eaee;padding:12px 20px;border-radius:12px;
+      font-size:20px;font-weight:600;color:#0f1824;display:inline-block;margin:0 0 10px;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,.5);
+    }
+    .service p{margin:0;color:#5a6470;font-size:15px;line-height:1.5}
+
+    /* Contact */
+    .contact-2col{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
+    .contact-info{
+      background:#f7f8fa;border:1px solid #d6dbe0;border-radius:16px;
+      box-shadow:0 6px 16px rgba(0,0,0,.06); padding:22px 28px; line-height:1.6;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    .contact-info p{ margin:8px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .contact-info strong{ min-width:120px; color:#111; }
+    .contact-info a{ color:#1f4aa2; text-decoration:none; }
+    .contact-info a:hover{ text-decoration:underline; }
+    .contact-map-wrap{ display:flex; align-items:center; }
+    .contact-map{ border:0; width:100%; height:100%; min-height:260px; border-radius:16px; box-shadow:0 6px 16px rgba(0,0,0,.08) }
+
+    /* Footer */
+    footer{padding:24px 20px;border-top:1px solid var(--steel-200);text-align:center;color:#f5f7fa}
+
+    /* Responsive */
+    @media (max-width:1280px){
+      .menu{display:none}
+      .burger{display:block}
+    }
+    @media (max-width:900px){
+      section.hero{padding:72px 0 56px;}
+      .about{grid-template-columns:1fr}
+      .contact-2col{ grid-template-columns:1fr; }
+      .contact-info p{ justify-content:flex-start; gap:10px; }
+      .contact-map{ height:320px; }
+    }
+
+    /* Mobile polish */
+    @media (max-width: 560px){
+      section{ padding: 40px 16px; }               /* marges plus compactes */
+      .service h3{ font-size: 18px; padding: 10px 14px; }
+      .contact-map{ height: 300px; }
+      .drawer{ inset: 56px 12px auto 12px; }
+      .menu a, .drawer a{ padding: 12px 14px; }
+      .hero-center-logo{ max-height: 90px; }       /* évite un logo trop grand */
+      .about-photo{ min-height: 520px; }           /* évite toute coupe du texte */
+      .about-photo .content{ padding: 36px 20px 86px; }
+    }
+  </style>
+
+  <!-- Données structurées LocalBusiness (démo) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Locksmith",
+    "name": "Serrurerie Fernandez",
+    "address": {"@type":"PostalAddress","addressLocality":"Nîmes","addressRegion":"Occitanie","addressCountry":"FR"},
+    "url":"https://exemple-domaine.fr",
+    "image":"https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop",
+    "telephone":"+33 6 00 00 00 00",
+    "areaServed":"Nîmes et alentours",
+    "sameAs": []
+  }
+  </script>
+</head>
+<body>
+  <div class="ribbon">Démo non officielle – maquette de refonte (Baptiste Dary)</div>
+
+  <header>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="menu" id="menu">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#escaliers">Escalier</a></li>
+        <li><a href="#garde-corps">Garde-Corps & Rampe</a></li>
+        <li><a href="#portails">Portail</a></li>
+        <li><a href="#portes">Porte</a></li>
+        <li><a href="#grilles">Grille & Clôture</a></li>
+        <li><a href="#tonnelles">Tonnelle & Pergola</a></li>
+        <li><a href="#cheminees">Cheminées & Barbecue</a></li>
+        <li><a href="#mobilier">Mobilier & Décoration Intérieure</a></li>
+        <li><a href="#jardin">Jardin</a></li>
+        <li><a class="cta" href="#contact">Contact</a></li>
+      </ul>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu">☰ Menu</button>
+    </nav>
+    <div class="drawer" id="drawer" aria-label="Menu mobile">
+      <a href="#accueil">Accueil</a>
+      <a href="#escaliers">Escalier</a>
+      <a href="#garde-corps">Garde-Corps & Rampe</a>
+      <a href="#portails">Portail</a>
+      <a href="#portes">Porte</a>
+      <a href="#grilles">Grille & Clôture</a>
+      <a href="#tonnelles">Tonnelle & Pergola</a>
+      <a href="#cheminees">Cheminées & Barbecue</a>
+      <a href="#mobilier">Mobilier & Décoration Intérieure</a>
+      <a href="#jardin">Jardin</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="accueil" aria-labelledby="hero-title">
+      <img class="hero-center-logo" src="templates/image-removebg-preview (1).png" alt="Logo Serrurerie Fernandez" />
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="about">
+      <h2>À propos</h2>
+      <div class="about">
+        <article class="card">
+          <p>
+            Créée en 1989 à Nîmes, la <strong>SERRURERIE FERNANDEZ</strong> vous propose
+            la création, la fabrication et la pose de pièces métalliques uniques et <strong>artisanales</strong>
+            réalisées sur-mesure : en passant par le mobilier contemporain en fer forgé, la mezzanine
+            ou la rampe d’escalier, la ferronnerie d’art trouve partout sa place dans la maison.
+            Afin de répondre à toutes les demandes et satisfaire tous les besoins des professionnels
+            et des particuliers, votre ferronnier conçoit et réalise :
+          </p>
+          <ul class="muted" style="margin:10px 0 0 18px;line-height:1.7">
+            <li>Métallerie et serrurerie</li>
+            <li>Pergolas</li>
+            <li>Escaliers, rampes et gardes corps</li>
+            <li>Portail et automatisme</li>
+            <li>Portes de garage et rideaux métalliques</li>
+            <li>Vérandas</li>
+            <li>Grilles et clôtures</li>
+            <li>Cheminées</li>
+            <li>Menuiseries métalliques</li>
+          </ul>
+        </article>
+
+        <aside class="card about-photo" aria-label="Atelier">
+          <img class="bg" src="templates/atelier.jpg" alt="" loading="lazy">
+          <div class="veil"></div>
+          <div class="content">
+            <h3>Atelier à Nîmes</h3>
+            <p>
+              Forte d’une grande expérience et d’un savoir-faire unique,
+              la <strong>SERRURERIE FERNANDEZ</strong> met à votre disposition une équipe d’artisans polyvalents et expérimentés.
+              Ils vous garantissent des réalisations sur-mesure de grande qualité, suivant vos choix et vos besoins.
+              Nos serruriers-ferronniers conçoivent et fabriquent avec soin, en respectant vos attentes esthétiques et techniques.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" aria-labelledby="services-title">
+      <h2 id="services-title">Nos services</h2>
+      <div class="services">
+        <div class="service">
+          <h3 id="escaliers">Escaliers</h3>
+          <p class="muted">Conception et pose d'escaliers métalliques sur mesure, intérieurs et extérieurs.</p>
+        </div>
+        <div class="service">
+          <h3 id="garde-corps">Garde-Corps & Rampe</h3>
+          <p class="muted">Garde-corps, rampes et mains courantes en acier / inox, conformes et durables.</p>
+        </div>
+        <div class="service">
+          <h3 id="portes">Portes</h3>
+          <p class="muted">Portes métalliques, blindées ou techniques. Rénovation et pose.</p>
+        </div>
+        <div class="service">
+          <h3 id="portails">Portails</h3>
+          <p class="muted">Fabrication de portails sur mesure : battants, coulissants, thermolaqués.</p>
+        </div>
+        <div class="service">
+          <h3 id="grilles">Grilles & Clôtures</h3>
+          <p class="muted">Clôtures, grilles de défense, séparatifs. Robustesse et finitions soignées.</p>
+        </div>
+        <div class="service">
+          <h3 id="tonnelles">Tonnelles & Pergolas</h3>
+          <p class="muted">Structures acier sur mesure pour jardin, terrasses et extérieurs.</p>
+        </div>
+        <div class="service">
+          <h3 id="cheminees">Cheminées & Barbecues</h3>
+          <p class="muted">Habillages métal, foyers, barbecues sur mesure, résistants et esthétiques.</p>
+        </div>
+        <div class="service">
+          <h3 id="mobilier">Mobilier & Décoration Intérieure</h3>
+          <p class="muted">Tables, étagères, verrières, pieds de table — design sobre et durable.</p>
+        </div>
+        <div class="service">
+          <h3 id="jardin">Jardin</h3>
+          <p class="muted">Bacs, bordures, portillons, éléments décoratifs extérieurs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <div class="contact-2col">
+        <div class="contact-info">
+          <p><strong>Adresse :</strong> 517 avenue du Dr Fleming, 30900 Nîmes</p>
+          <p><strong>Téléphone :</strong> <a href="tel:+33466845267">04 66 84 52 67</a></p>
+          <p><strong>Email :</strong> <a href="mailto:serrureriefernandez30@gmail.com">serrureriefernandez30@gmail.com</a></p>
+        </div>
+        <div class="contact-map-wrap">
+          <iframe
+            class="contact-map"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=517+Av.+du+Dr+Fleming,+30900+Nîmes&hl=fr&z=16&output=embed">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="y"></span> Serrurerie Fernandez · Démo non officielle – Maquette réalisée par Baptiste Dary
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const burger = document.getElementById('burger');
+    const drawer = document.getElementById('drawer');
+    burger?.addEventListener('click', ()=>{
+      drawer.style.display = drawer.style.display === 'block' ? 'none' : 'block';
+    });
+    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+      drawer.style.display='none';
+    }));
+  </script>
+</body>
+</html>
