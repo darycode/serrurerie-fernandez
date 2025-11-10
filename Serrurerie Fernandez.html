@@ -45,19 +45,6 @@
       backdrop-filter:blur(8px);
       border-bottom:1px solid var(--steel-200)
     }
-
-.site-footer{
-  padding: 28px 20px;
-  border-top: 1px solid var(--steel-200);
-  text-align: center;
-  color: #f5f7fa;
-  font-size: 14px;
-  line-height: 1.6;
-}
-.site-footer a{ color:#dbe7ff; text-decoration:none; }
-.site-footer a:hover{ text-decoration:underline; }
-
-
     .nav{max-width:1500px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 20px}
     .menu{margin-left:auto;display:flex;gap:8px;list-style:none;padding:0;flex-wrap:wrap;row-gap:6px}
     .menu a{padding:8px 10px;border-radius:10px;white-space:nowrap}
@@ -376,17 +363,9 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-  © <span id="y"></span> Serrurerie Fernandez · Démo non officielle — Maquette réalisée par Baptiste Dary
-  <br><br>
-  <strong>Mentions légales :</strong><br>
-  Éditeur du site : <strong>Baptiste Dary</strong><br>
-  Statut : étudiant — projet de refonte non commercial<br>
-  Contact : <a href="mailto:baptistedary.pro@gmail.com">baptistedary.pro@gmail.com</a><br>
-  Hébergeur : <strong>GitHub Pages</strong> — GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA<br>
-  <em>Ce site est une maquette non officielle à but de démonstration.</em>
-</footer>
-
+  <footer>
+    © <span id="y"></span> Serrurerie Fernandez · Démo non officielle – Maquette réalisée par Baptiste Dary
+  </footer>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
